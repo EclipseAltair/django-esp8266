@@ -1,34 +1,34 @@
-Settings -> Version Control -> Git -> Path
-Settings -> Version Control -> Github -> login
+Settings -> Version Control -> Git -> Path  
+Settings -> Version Control -> Github -> login  
 VCS -> Checkout from Version Control -> Git
 
--Создание виртуального окружения
+-Создание виртуального окружения  
 python -m venv espenv
 
--Запуск виртуального окружения
+-Запуск виртуального окружения  
 Settings -> Project Settings -> Project Interpreter
 
-или
+или  
 
 cd espenv/scripts
 activate.bat
 cd..
 cd..
 
--Установка зависимостей
+-Установка зависимостей  
 pip install -r requirements.txt
 
--Запуск сервера
+-Запуск сервера  
 py manage.py runserver
 
--Отправка изменений
+-Отправка изменений  
 зеленая стрелка VCS
 
--Отправить
+-Отправить  
 Commit -> Commit and push
 
 
 
--Celery & Redis
-sudo service redis-server start
+-Celery & Redis  
+sudo service redis-server start  
 celery -A django-esp8266 worker -B -l INFO

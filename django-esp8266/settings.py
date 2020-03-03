@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
     'core',
 ]
 
@@ -39,7 +38,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'django-esp8266.urls'
 
 TEMPLATES = [
     {
@@ -57,7 +56,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'django-esp8266.wsgi.application'
 
 
 # Database
@@ -115,40 +114,20 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static', 'assets'),
 )
 
-from datetime import timedelta
-import djcelery
 
+# from datetime import timedelta
+from celery.schedules import crontab
 
-djcelery.setup_loader()
-
-REDIS_BACKEND = {
-    'HOST': 'localhost',
-    'PORT': 6379,
-    'DB': 0,
-}
-
-REDIS_BACKEND_URL = 'redis://{host}:{port}/{db}'.format(
-    host=REDIS_BACKEND['HOST'],
-    port=REDIS_BACKEND['PORT'],
-    db=REDIS_BACKEND['DB'],
-)
-
-
-CELERY_RESULT_BACKEND = 'djcelery.backends.database.DatabaseBackend'
-
-CELERY_TASK_RESULT_EXPIRES = 18000   # 5 часов
+CELERY_BROKER_URL = 'redis://localhost:6379'
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIME_ZONE = TIME_ZONE
 
-BROKER_URL = REDIS_BACKEND_URL
-
-CELERYBEAT_SHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-
-CELERYBEAT_SHEDULE = {
-    'greet-every-5-seconds': {
-        'task': 'testing_pizza.tasks.greet_new_orders',
-        'schedule': timedelta(seconds=5),
-    },
+CELERY_BEAT_SCHEDULE = {
+    'data_task': {
+        'task': 'core.tasks.data_per_half_hour',
+        # 'schedule': timedelta(seconds=10)
+        'schedule': crontab(minute='*/30')
+    }
 }

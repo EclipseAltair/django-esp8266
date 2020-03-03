@@ -26,3 +26,9 @@ py manage.py runserver
 
 -Отправить
 Commit -> Commit and push
+
+
+
+-Celery & Redis
+sudo service redis-server start
+celery -A django-esp8266 worker -B -l INFO

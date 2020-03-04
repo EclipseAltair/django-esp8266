@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import wiotp.sdk.device
 import time
 

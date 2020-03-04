@@ -1,4 +1,4 @@
-# import json
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from core.models import Weather
 

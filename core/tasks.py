@@ -10,6 +10,7 @@ from random import randint
 @shared_task
 def data_per_half_hour():
     # data = applicationIOT.get_data_device()
+    # print(data)
     w = Weather(
         temp_in=randint(40, 60),
         temp_out=randint(40, 60),

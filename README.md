@@ -1,19 +1,19 @@
-*---PyCharm:---*
+*---PyCharm:---*  
 File -> Settings -> Version Control -> Git -> Path  
 File -> Settings -> Version Control -> Github -> login  
 VCS -> Checkout from Version Control -> Git
 
-*---Terminal:---*
+*---Terminal:---*  
 -Создание виртуального окружения:  
 python3 -m venv espenv
 
-*---PyCharm:---*
+*---PyCharm:---*  
 -Запуск виртуального окружения:  
 File -> Settings -> Project Settings -> Project Interpreter
 
 или  
 
-*---Terminal:---*
+*---Terminal:---*  
 cd espenv/scripts  
 activate.bat  
 cd ..  

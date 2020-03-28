@@ -1,23 +1,16 @@
-*---PyCharm:---*  
+**---PyCharm:---**  
 File -> Settings -> Version Control -> Git -> Path  
 File -> Settings -> Version Control -> Github -> login  
 VCS -> Checkout from Version Control -> Git
 
-*---Terminal:---*  
+**---Terminal:---**  
 -Создание виртуального окружения:  
 python3 -m venv espenv
 
-*---PyCharm:---*  
+**---PyCharm:---**  
 -Запуск виртуального окружения:  
-File -> Settings -> Project Settings -> Project Interpreter
+File -> Settings -> Project Settings -> Project Interpreter -> Add Local
 
-или  
-
-*---Terminal:---*  
-cd espenv/scripts  
-activate.bat  
-cd ..  
-cd ..
 
 -Установка зависимостей:  
 pip install -r requirements.txt

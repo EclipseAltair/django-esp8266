@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import wiotp.sdk.application
+from .tasks import data_per_half_hour
 
 
 app_config = {
@@ -9,12 +10,11 @@ app_config = {
     }
 }
 
-
-data_event = {}
+data_event = {"ti": 0, "to": 0, "tw": 0, "pr": 0, "hi": 0, "ho": 0, "vt": 0}
 
 
 def event_callback(event):
-    global data_event 
+    global data_event
     data_event = event.data
 
 

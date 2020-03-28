@@ -1,34 +1,32 @@
-Settings -> Version Control -> Git -> Path  
-Settings -> Version Control -> Github -> login  
+*---PyCharm:---*
+File -> Settings -> Version Control -> Git -> Path  
+File -> Settings -> Version Control -> Github -> login  
 VCS -> Checkout from Version Control -> Git
 
--Создание виртуального окружения  
-python -m venv espenv
+*---Terminal:---*
+-Создание виртуального окружения:  
+python3 -m venv espenv
 
--Запуск виртуального окружения  
-Settings -> Project Settings -> Project Interpreter
+*---PyCharm:---*
+-Запуск виртуального окружения:  
+File -> Settings -> Project Settings -> Project Interpreter
 
 или  
 
-cd espenv/scripts
-activate.bat
-cd..
-cd..
+*---Terminal:---*
+cd espenv/scripts  
+activate.bat  
+cd ..  
+cd ..
 
--Установка зависимостей  
+-Установка зависимостей:  
 pip install -r requirements.txt
 
--Запуск сервера  
-py manage.py runserver
+-Запуск сервера:  
+python3 manage.py runserver
 
--Отправка изменений  
-зеленая стрелка VCS
+-Запуск redis  
+sudo service redis-server start
 
--Отправить  
-Commit -> Commit and push
-
-
-
--Celery & Redis  
-sudo service redis-server start  
+-Запуск celery  
 celery -A django-esp8266 worker -B -l INFO

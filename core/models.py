@@ -10,6 +10,7 @@ class Weather(models.Model):
     humidity_in = models.PositiveSmallIntegerField('Humidity in')
     humidity_out = models.PositiveSmallIntegerField('Humidity out')
     voltage = models.DecimalField('Voltage', max_digits=4, decimal_places=2)
+    rain = models.BooleanField('Rain', default=False)
     time = models.DateTimeField('Time', auto_now=False, auto_now_add=True)
 
     class Meta:

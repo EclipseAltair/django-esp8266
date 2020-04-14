@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+    <div id="container" style="height:600px"></div>
+
+    <ul>
+        <li id='data1'>Температура внутри</li>
+        <li id='data2'>Температура снаружи</li>
+        <li id='data3'>Температура воды</li>
+        <li id='data4'>Давление</li>
+        <li id='data5'>Влажность внутри</li>
+        <li id='data6'>Влажность снаружи</li>
+        <li id='data7'>Напряжение</li>
+        <li id='data8'>Дождь</li>
+    </ul>
+    <style>
+        body {
+            font-family: Helvetica, Calibri, sans-serif;
+        }
+
+        ul {
+            margin: .5em;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        var chart;
+        var dataID;
+
+        var dataObj = {};
+        dataObj.data1 = [];
+        dataObj.data2 = [];
+        dataObj.data3 = [];
+        dataObj.data4 = [];
+        dataObj.data5 = [];
+        dataObj.data6 = [];
+        dataObj.data7 = [];
+        dataObj.data8 = [];
+
+
+        {% for chart in charts %}
+            dataObj.data1.push({{ chart.temp_in }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data2.push({{ chart.temp_out }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data3.push({{ chart.temp_water }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data4.push({{ chart.pressure }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data5.push({{ chart.humidity_in }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data6.push({{ chart.humidity_out }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data7.push({{ chart.voltage }});
+        {% endfor %}
+
+        {% for chart in charts %}
+            dataObj.data8.push({{ chart.rain }});
+        {% endfor %}
+
+
+        //set the chart options
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            },
+            title: {text: ''},
+            legend: {enabled: true},
+            tooltip: {},
+            plotOptions: {
+                series: {
+                    lineWidth: 2,
+                    shadow: true,
+                    marker: {
+                        enabled: true,
+                        symbol: 'circle',
+                        radius: .5,
+                        states: {
+                            hover: {
+                                radius: 3,
+                                lineWidth: 1,
+                                lineColor: '#fff'
+                            }
+                        }
+                    }
+                }
+            },
+            xAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'Time'
+                }
+            },
+            yAxis: {
+                min: 0,
+                endOnTick: false,
+                title: {text: ''},
+                gridLineColor: '#000'
+            },
+        });
+
+        //call a default chart
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container'
+            },
+            series: [{
+                data: dataObj['data1']
+            }]
+
+        });
+
+        //call chart on click
+        $('li').click(function () {
+            dataID = this.id;
+            chart.destroy();
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                },
+                series: [{
+                    data: dataObj[dataID]
+
+                }]
+
+            });
+        });
+
+    </script>
+{% endblock %}

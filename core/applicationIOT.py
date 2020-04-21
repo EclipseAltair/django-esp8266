@@ -2,7 +2,6 @@
 import wiotp.sdk.application
 from core.models import Weather
 
-
 app_config = {
     "auth": {
         "key": "a-0k740p-6un1ebkdpy",
@@ -13,16 +12,17 @@ app_config = {
 client = wiotp.sdk.application.ApplicationClient(config=app_config)
 
 def get_data_device(event):
-    data = event.data
+    data_device = event.data
+    print(data_device)
     w = Weather(
-        temp_in=data['ti'],
-        temp_out=data['to'],
-        temp_water=data['tw'],
-        pressure=data['pr'],
-        humidity_in=data['hi'],
-        humidity_out=data['ho'],
-        voltage=data['vo'],
-        rain=data['ra']
+        temp_in=data_device['ti'],
+        temp_out=data_device['to'],
+        temp_water=data_device['tw'],
+        pressure=data_device['pr'],
+        humidity_in=data_device['hi'],
+        humidity_out=data_device['ho'],
+        voltage=data_device['vo'],
+        rain=data_device['ra']
     )
     w.save()
 
@@ -30,30 +30,3 @@ def get_data_device(event):
 client.connect()
 client.deviceEventCallback = get_data_device
 client.subscribeToDeviceEvents()
-
-# import wiotp.sdk.application
-#
-#
-# app_config = {
-#     "auth": {
-#         "key": "a-0k740p-6un1ebkdpy",
-#         "token": "T7(mGuyfFWzPH263)7",
-#     }
-# }
-#
-# data_event = {"ti": 0, "to": 0, "tw": 0, "pr": 0, "hi": 0, "ho": 0, "vo": 0, "ra": 0}
-#
-#
-# def event_callback(event):
-#     global data_event
-#     data_event = event.data
-#
-#
-# def get_data_device():
-#     client.deviceEventCallback = event_callback
-#     return data_event
-#
-#
-# client = wiotp.sdk.application.ApplicationClient(config=app_config)
-# client.connect()
-# client.subscribeToDeviceEvents(msgFormat="json")

@@ -8,30 +8,30 @@
                 <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data.temp_in }}</p>
+                    <p class="card-text">{{ data_weather.temp_in }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
             <div class="card">
                 <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data.temp_out }}</p>
+                    <p class="card-text">{{ data_weather.temp_out }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
             <div class="card">
                 <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data.temp_water }}</p>
+                    <p class="card-text">{{ data_weather.temp_water }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
         </div>
@@ -41,30 +41,30 @@
                 <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data.humidity_in }}</p>
+                    <p class="card-text">{{ data_weather.humidity_in }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
             <div class="card">
                 <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data.humidity_out }}</p>
+                    <p class="card-text">{{ data_weather.humidity_out }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
             <div class="card">
                 <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data.pressure }}</p>
+                    <p class="card-text">{{ data_weather.pressure }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
         </div>
@@ -74,20 +74,20 @@
                 <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data.rain }}</p>
+                    <p class="card-text">{{ data_weather.rain }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
             <div class="card">
                 <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data.voltage }}</p>
+                    <p class="card-text">{{ data_weather.voltage }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ data.time }}</small>
+                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
                 </div>
             </div>
         </div>

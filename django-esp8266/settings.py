@@ -94,22 +94,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static', 'assets'),
 )
-
-
-# from datetime import timedelta
-# # from celery.schedules import crontab
-#
-#
-# CELERY_BROKER_URL = 'redis://localhost:6379'
-#
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_TIME_ZONE = TIME_ZONE
-#
-# CELERY_BEAT_SCHEDULE = {
-#     'data_task': {
-#         'task': 'core.tasks.data_per_half_hour',
-#         'schedule': timedelta(seconds=10)
-#         # 'schedule': crontab(minute='*/30')
-#     }
-# }

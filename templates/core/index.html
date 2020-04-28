@@ -2,92 +2,91 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <div class="card-deck">
-            <div class="card">
-                <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data_weather.temp_in }}</p>
+    <div class="bg-color">
+        <div class="container">
+            <div class="card-deck pt-5">
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-thermometer-three-quarters fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Температура внутри</h5>
+                        <p class="card-text">{{ data_weather.temp_in }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-thermometer-quarter fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Температура снаружи</h5>
+                        <p class="card-text">{{ data_weather.temp_our }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
+                </div>
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-water fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Температура воды</h5>
+                        <p class="card-text">{{ data_weather.temp_water }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
+                </div>
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-tint fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Влажность внутри</h5>
+                        <p class="card-text">{{ data_weather.humidity_in }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data_weather.temp_out }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
-                </div>
-            </div>
-            <div class="card">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data_weather.temp_water }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
-                </div>
-            </div>
-        </div>
 
-        <div class="card-deck">
-            <div class="card">
-                <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data_weather.humidity_in }}</p>
+            <div class="card-deck pt-5 pb-5">
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-burn fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Влажность снаружи</h5>
+                        <p class="card-text">{{ data_weather.humidity_out }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                <div class="card border-primary bg-color">
+                    <i class="fab fa-cloudscale fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Атмосферное давление</h5>
+                        <p class="card-text">{{ data_weather.pressure }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data_weather.humidity_out }}</p>
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-cloud-sun-rain fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Дождь</h5>
+                        <p class="card-text">{{ data_weather.rain }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
-                </div>
-            </div>
-            <div class="card">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data_weather.pressure }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-deck">
-            <div class="card">
-                <img src="{% static 'img/temp.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Температура</h5>
-                    <p class="card-text">{{ data_weather.rain }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
-                </div>
-            </div>
-            <div class="card">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text">{{ data_weather.voltage }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                <div class="card border-primary bg-color">
+                    <i class="fas fa-car-battery fa-10x text-center pt-3"></i>
+                    <div class="card-body bg-color">
+                        <h5 class="card-title">Напряжение аккумулятора</h5>
+                        <p class="card-text">{{ data_weather.voltage }}</p>
+                    </div>
+                    <div class="card-footer bg-color">
+                        <small class="text-muted">{{ day }} {{ month }} {{ hours }}:{{ minutes }}</small>
+                    </div>
                 </div>
             </div>
         </div>

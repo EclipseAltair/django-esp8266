@@ -1,3 +1,17 @@
+ul {
+    list-style-type: none;
+}
+
+.bg-color {
+    background-color: black;
+}
+
+
+/**
+GRAPHS
+**/
+
+
 .chart-wrap {
     width: 650px;
     height: 600px;

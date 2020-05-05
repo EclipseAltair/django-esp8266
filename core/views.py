@@ -29,6 +29,18 @@ def main(request):
 
 
 def graphs(request):
-    charts = Weather.objects.all().order_by('-id')[:256]
+    charts = Weather.objects.all().order_by('-id')[:336]
+
+    dates  = []
+    for chart in charts:
+        date = str(chart.time)
+        month = MONTH[date[5:7]]
+        day = date[8:10]
+        hours = (int(date[11:13]) + 3) % 24
+        minutes = date[14:16]
+
+        dates.append('{} {} {}:{}'.format(day, month, hours, minutes))
+
+
     return render(request, 'core/graphs.html', locals())
 

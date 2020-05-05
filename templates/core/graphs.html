@@ -4,7 +4,7 @@
 {% block content %}
     <div class="bg-color">
         <div class="container">
-            <div id="container" style="height:600px"></div>
+            <div id="container" style="height:650px"></div>
             <div class="row pt-3">
                 <div class="col">
                     <button id='data1' type="button" class="btn btn-block btn-outline-primary">Температура внутри</button>
@@ -53,41 +53,22 @@
         dataObj.data6 = [];
         dataObj.data7 = [];
         dataObj.data8 = [];
-
+        dataObj.date_time = [];
 
         {% for chart in charts %}
             dataObj.data1.push({{ chart.temp_in }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data2.push({{ chart.temp_out }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data3.push({{ chart.temp_water }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data4.push({{ chart.pressure }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data5.push({{ chart.humidity_in }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data6.push({{ chart.humidity_out }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data7.push({{ chart.voltage }});
-        {% endfor %}
-
-        {% for chart in charts %}
             dataObj.data8.push({{ chart.rain }});
         {% endfor %}
 
-
+        {% for date in dates %}
+            dataObj.date_time.push('{{ date }}');
+        {% endfor %}
         //set the chart options
         Highcharts.setOptions({
             global: {
@@ -115,17 +96,21 @@
                 }
             },
             xAxis: {
+{#                min: 0,#}
                 allowDecimals: false,
                 title: {
                     text: 'Time'
-                }
+                },
+                categories: dataObj.date_time,
+                tickInterval: 48
+
             },
             yAxis: {
                 min: 0,
                 endOnTick: false,
                 title: {text: ''},
                 gridLineColor: '#000'
-            },
+            }
         });
 
         //call a default chart
@@ -145,7 +130,7 @@
             chart.destroy();
             chart = new Highcharts.Chart({
                 chart: {
-                    renderTo: 'container',
+                    renderTo: 'container'
                 },
                 series: [{
                     data: dataObj[dataID]

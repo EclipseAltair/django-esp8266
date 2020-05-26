@@ -4,13 +4,16 @@
 {% block content %}
     <div class="bg-color">
         <div class="container">
+            <div class="pt-5"></div>
             <div id="container" style="height:650px"></div>
             <div class="row pt-3">
                 <div class="col">
-                    <button id='data1' type="button" class="btn btn-block btn-outline-primary">Температура внутри</button>
+                    <button id='data1' type="button" class="btn btn-block btn-outline-primary">Температура внутри
+                    </button>
                 </div>
                 <div class="col">
-                    <button id='data2' type="button" class="btn btn-block btn-outline-primary">Температура снаружи</button>
+                    <button id='data2' type="button" class="btn btn-block btn-outline-primary">Температура снаружи
+                    </button>
                 </div>
                 <div class="col">
                     <button id='data3' type="button" class="btn btn-block btn-outline-primary">Температура воды</button>
@@ -24,7 +27,8 @@
                     <button id='data5' type="button" class="btn btn-block btn-outline-primary">Влажность внутри</button>
                 </div>
                 <div class="col">
-                    <button id='data6' type="button" class="btn btn-block btn-outline-primary">Влажность снаружи</button>
+                    <button id='data6' type="button" class="btn btn-block btn-outline-primary">Влажность снаружи
+                    </button>
                 </div>
                 <div class="col">
                     <button id='data7' type="button" class="btn btn-block btn-outline-primary">Напряжение</button>
@@ -40,6 +44,7 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="{% static 'js/gray.js' %}"></script>
     <script>
         var chart;
         var dataID;
@@ -70,12 +75,13 @@
             dataObj.date_time.push('{{ date }}');
         {% endfor %}
         //set the chart options
+
         Highcharts.setOptions({
             global: {
                 useUTC: false
             },
-            title: {text: ''},
-            legend: {enabled: true},
+            title: {text: 'Температура внутри'},
+            legend: {enabled: false},
             tooltip: {},
             plotOptions: {
                 series: {
@@ -96,20 +102,21 @@
                 }
             },
             xAxis: {
-{#                min: 0,#}
+                {#                min: 0,#}
                 allowDecimals: false,
                 title: {
                     text: 'Time'
                 },
                 categories: dataObj.date_time,
-                tickInterval: 48
+                tickInterval: 48,
+                gridLineColor: '#fff'
 
             },
             yAxis: {
                 min: 0,
                 endOnTick: false,
                 title: {text: ''},
-                gridLineColor: '#000'
+                gridLineColor: '#fff'
             }
         });
 
@@ -118,8 +125,14 @@
             chart: {
                 renderTo: 'container'
             },
+            legend: {
+                title: {
+                    text: 'kek'
+                }
+            },
             series: [{
-                data: dataObj['data1']
+                data: dataObj['data1'],
+                name: ''
             }]
 
         });
@@ -134,11 +147,12 @@
                 },
                 series: [{
                     data: dataObj[dataID]
-
-                }]
-
+                }],
             });
+            chart.setTitle(
+                { text: document.getElementById(dataID).innerHTML },
+                { color: 'green' }
+            )
         });
-
     </script>
 {% endblock %}

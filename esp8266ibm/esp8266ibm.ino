@@ -1,30 +1,14 @@
-#include <DHT.h>
-#include <DHT_U.h>
 
-#include <BearSSLHelpers.h>
-#include <CertStoreBearSSL.h>
+//--------------------------------
 #include <ESP8266WiFi.h>
-#include <ESP8266WiFiAP.h>
-#include <ESP8266WiFiGeneric.h>
-#include <ESP8266WiFiMulti.h>
-#include <ESP8266WiFiScan.h>
-#include <ESP8266WiFiSTA.h>
-#include <ESP8266WiFiType.h>
-#include <WiFiClient.h>
-#include <WiFiClientSecure.h>
-#include <WiFiClientSecureAxTLS.h>
-#include <WiFiClientSecureBearSSL.h>
-#include <WiFiServer.h>
-#include <WiFiServerSecure.h>
-#include <WiFiServerSecureAxTLS.h>
-#include <WiFiServerSecureBearSSL.h>
-#include <WiFiUdp.h>
-
-
-//#include "DHT.h"
-#include <WiFiClient.h>
 #include <PubSubClient.h>
-
+//-------------------------------
+#include <RTClib.h>
+#include <Wire.h>
+RTC_DS3231 rtc;
+char t[32];
+boolean otpr ;
+//------------------------------
 
 //-------- Настройки Wi-Fi -----------
 const char* ssid = "Beeline_2G_F43654";           // Имя
@@ -37,9 +21,7 @@ const char* password = "W123456w";      // пароль
 #define TOKEN "NDdVf07KBd2vjL(e6d"// Вставьте токен
 
 //-------- IOT связь --------
-#define DHTPIN 4
-#define DHTTYPE DHT11 // DHT 11
-DHT dht(DHTPIN, DHTTYPE);
+
 char server[] = ORG ".messaging.internetofthings.ibmcloud.com";
 char authMethod[] = "use-token-auth";
 char token[] = TOKEN;
@@ -56,8 +38,11 @@ PubSubClient client(server, 1883, callback, wifiClient);
 void setup()
 {
   Serial.begin(9600);
-  dht.begin();
-
+  //-----------------------------------------------------------------------
+  Wire.begin();
+  rtc.begin();
+  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  //----------------------------------------------------------------------
   pinMode(13, OUTPUT);              // LED13, который будет работать на волосах IBM
   pinMode(2, OUTPUT);               // LED2 показывает подключение к Интернету
   client.setCallback(callback);      // Настраивает на возврат функции
@@ -114,26 +99,55 @@ void loop()
   }
   // проверяет, верен ли возврат, в противном случае что-то не так.
   /*if (isnan((float)dht.readHumidity()) || isnan((float)dht.readTemperature()))
-  {
+    {
     Serial.println("Failed to read from DHT");
     delay(2000);
-  }
-  else
-  {  */
-    String payload = "{\"humidity\":{\"value\":";      // Начинается строка, связывающаяся с адресом
-//    payload += (dht.readHumidity());                 // Назначает значение показания температуры для строки
+    }
+    else
+    {  */
+  String payload = "{\"ti\":";      // Начинается строка, связывающаяся с адресом
+  //    payload += (dht.readHumidity());                 // Назначает значение показания температуры для строки
+  payload += (25);
+  payload += (",");
+  payload += "\"to\":";
+  //    payload += (dht.readTemperature());
+  payload += (random(-10, 50));
+  payload += (",");
+   payload += "\"tw\":";
+    payload += (40);
+    payload += ",";
+    payload += "\"pr\":";
+    payload += (760);
+    payload += ",";
+    payload += "\"hi\":";
+    payload += (90);
+    payload += ",";
+    payload += "\"ho\":";
+    payload += (70);
+    payload += ",";
+    payload += "\"vo\":";
+    payload += (14.4);
+    payload += ",";
+    payload += "\"ra\":";
     payload += (0);
-    payload += "},";
-    payload += "\"temperature\":{\"value\":";
-//    payload += (dht.readTemperature());
-    payload += (random(-10,50));
-    payload += "}}";                          // Завершает строку.
 
-    Serial.print("Enviando payload: ");
-    Serial.println(payload);                  // Запишите строку в последовательный монитор
-    client.publish(eventTopic, (char*) payload.c_str() );  // Опубликовать строку
-    delay(500);
-   // }
+  payload += "}";// Завершает строку.
+  DateTime now = rtc.now();
+  sprintf(t, "%02d:%02d:%02d %02d/%02d/%02d",  now.hour(), now.minute(), now.second(), now.day(), now.month(), now.year());
+  Serial.print(F("Date/Time: "));
+  Serial.println(t);
+  if ((now.minute()%2 == 0)and(otpr == 0)){
+    otpr = 1;
+  Serial.print("Enviando payload: ");
+  Serial.println(payload);                  // Запишите строку в последовательный монитор
+  client.publish(eventTopic, (char*) payload.c_str() );  // Опубликовать строку
+  delay(500);
+  }
+  if (now.minute()%2 != 0){
+    otpr = 0;
+  }
+  delay(500);
+  // }
 }
 
 void callback(char* topic, byte* payload, unsigned int payloadLength)

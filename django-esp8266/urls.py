@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.urls import path
-from core.views import graphs, main
+from django.urls import path, include
 
 
 urlpatterns = [
-    path('', main, name='main'),
-    path('graphs', graphs, name='graphs'),
+    path('', include('core.urls')),
+    path('', include('device.urls')),
     path('admin/', admin.site.urls),
 ]

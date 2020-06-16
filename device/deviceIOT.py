@@ -18,15 +18,15 @@ def myCommandCallback(cmd):
     print("Command received: %s" % cmd.data)
 
 # Configure
-device1 = wiotp.sdk.device.DeviceClient(config=config, logHandlers=None)
-device1.commandCallback = myCommandCallback
+client = wiotp.sdk.device.DeviceClient(config=config, logHandlers=None)
+client.commandCallback = myCommandCallback
 
-# Connect
-device1.connect()
-
-# Send Data
-myData={'ti' : 50}
-device1.publishEvent(eventId="status", msgFormat="json", data=myData, qos=0, onPublish=None)
-
-# Disconnect
-device1.disconnect()
+# # Connect
+# device1.connect()
+#
+# # Send Data
+# myData={'ti' : 50}
+# device1.publishEvent(eventId="status", msgFormat="json", data=myData, qos=0, onPublish=None)
+#
+# # Disconnect
+# device1.disconnect()

@@ -16,3 +16,5 @@ pip install -r requirements.txt
 
 -Запуск сервера:  
 python devmanage.py runserver
+
+Qwerty12345

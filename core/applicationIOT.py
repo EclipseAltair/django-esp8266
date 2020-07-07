@@ -28,9 +28,5 @@ def get_data_device(event):
 
 
 client.connect()
-
-commandData={'text' : 0}
-client.publishCommand("Esp8266", "seradya", "text", "json", commandData)
-
-# client.deviceEventCallback = get_data_device
-# client.subscribeToDeviceEvents()
+client.deviceEventCallback = get_data_device
+client.subscribeToDeviceEvents(msgFormat="json")

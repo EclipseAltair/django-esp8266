@@ -18,6 +18,7 @@ MONTH = {
     '12': 'Декабря',
 }
 
+
 def main(request):
     data_weather = Weather.objects.all().last()
     date = str(data_weather.time)
